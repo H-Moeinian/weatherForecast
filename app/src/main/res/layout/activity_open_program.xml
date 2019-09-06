@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenProgramActivity"
+    android:background="#7600FF"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="Weather Forecast"
+        android:textSize="33sp"
+        android:textStyle="italic|bold"
+        />
+
+    <TextView
+        android:textColor="#ffffff"
+        android:id="@+id/txtAppName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Touch to start!"
+        android:textSize="19dp"
+        android:textStyle="italic|bold" />
+</LinearLayout>
+
+
