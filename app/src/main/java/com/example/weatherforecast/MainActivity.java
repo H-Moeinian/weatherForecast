@@ -45,6 +45,7 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity {
 
     int dayOfWeek;
+    OpenWeather openWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         super.onSuccess(statusCode, headers, response);
                         System.out.println(response.toString());
                         Gson gson = new Gson();
-                        OpenWeather openWeather = gson.fromJson(response.toString(),OpenWeather.class);
+                        openWeather = gson.fromJson(response.toString(),OpenWeather.class);
                         List<Weather> weather =  openWeather.getWeather();
                         String description = weather.get(0).getDescription();
                         double temparature = openWeather.getMain().getTemp();
@@ -310,7 +311,10 @@ public class MainActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         OpenWeeklyWeather yahooWeather = gson.fromJson(response.toString(), OpenWeeklyWeather.class);
 
+                        int sunRise = yahooWeather.getCity().getSunrise();
+                        int sunSet = yahooWeather.getCity().getSunset();
                         List<LList> list = yahooWeather.getList();
+                        List<Integer> dt = new ArrayList<>();
                         List<Double> temp = new ArrayList<>();
                         List<String> ID = new ArrayList<>();
                         String s = list.get(0).getDtTxt().substring(0, 10);
@@ -322,10 +326,11 @@ public class MainActivity extends AppCompatActivity {
                                 s = list.get(i).getDtTxt().substring(0, 10);
                                 temp.add(list.get(i).getMain().getTemp());
                                ID.add((list.get(i).getWeather().get(0).getId()).toString());
+                               dt.add(list.get(i).getDt());
 
                             }
                         }
-                        RecyclerAdapter adapter = new RecyclerAdapter(temp,dayOfWeek,ID);
+                        RecyclerAdapter adapter = new RecyclerAdapter(temp,dayOfWeek,ID,openWeather.getSys().getSunrise(),openWeather.getSys().getSunset(),openWeather.getDt());
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,
                                 RecyclerView.HORIZONTAL, false));

@@ -15,11 +15,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
    List<Double> temp;
     List<String> ID;
     int dayOfWeek;
+    int sunRise;
+    int sunSet;
+    int dt;
 
-    public RecyclerAdapter( List<Double> temp, int dayOfWeek, List<String> ID ){
+    public RecyclerAdapter( List<Double> temp, int dayOfWeek, List<String> ID, int sunRise, int sunSet,int dt ){
         this.temp = temp;
         this.dayOfWeek = dayOfWeek;
         this.ID = ID;
+        this.sunRise = sunRise;
+        this.sunSet = sunSet;
+        this.dt = dt;
 
     }
 
@@ -141,8 +147,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 break;
 
         }
+        if(this.dt> this.sunSet ||
+                this.dt< this.sunRise) {
+            if(Integer.valueOf(ID.get(i))==800)
+                recyclerViewHolder.imgID.setImageResource(R.drawable.n01);
+            else if(Integer.valueOf(ID.get(i))==801)
+                recyclerViewHolder.imgID.setImageResource(R.drawable.n02);
+            else if(Integer.valueOf(ID.get(i))==500 ||
+                    Integer.valueOf(ID.get(i))==501 ||
+                    Integer.valueOf(ID.get(i))==502 ||
+                    Integer.valueOf(ID.get(i))==503 ||
+                    Integer.valueOf(ID.get(i))==504)
+                recyclerViewHolder.imgID.setImageResource(R.drawable.n10);
+           }
 
-        }
+    }
 
 
     @Override
